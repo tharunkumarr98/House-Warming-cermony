@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rbs House Warming Cermony</title>
+    <title>Rbs House Warming Ceremony</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Charmonman:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -12,63 +12,66 @@
         :root {
             --primary-color: #7a4a2b; /* A warm, traditional brown */
             --secondary-color: #b38b6d; /* Lighter shade for accents on hover */
-            --background-color: #ffffff;
-            --text-color: #b38b6d;
+            --background-color: #ffffff; /* This will be overridden by the body's transparency in this layout */
+            --text-color: #b38b6d; /* Darker text for readability */
             --button-text-color: #ffffff;
             --shadow-color: rgba(0, 0, 0, 0.2);
 
             /* CUSTOMIZE YOUR EVENT DETAILS HERE */
             --invitation-date: "July 20, 2025"; /* Example: "July 20, 2025" */
             --invitation-time: "10:30 AM onwards"; /* Example: "10:30 AM onwards" */
-            --google-maps-url: "http://googleusercontent.com/maps.google.com/3"; /* REPLACE with your actual Google Maps URL */
+            --google-maps-url: "https://www.google.com/maps/search/?api=1&query=Your+Event+Location+Address"; /* REPLACE with your actual Google Maps URL */
             --wishes-email: "tharunkumarr98@gmail.com"; /* REPLACE with your family's email address */
         }
 
         body {
             font-family: 'Playfair Display', serif;
-            background-image: url('https://raw.githubusercontent.com/tharunkumarr98/House-Warming-cermony/main/Shanku%20Chakralu.png'); 
+            background-image: url('https://raw.githubusercontent.com/tharunkumarr98/House-Warming-cermony/main/Shanku%20Chakralu.png');
             background-size: contain; 
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: center; /* This sets a base background color */
             color: var(--text-color);
             margin: 0;
-            padding: 20px;
+            padding: 20px; /* General padding around content */
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            align-items: center; /* Centers content horizontally */
+            min-height: 100vh; /* Ensures body takes at least full viewport height */
             text-align: center;
             position: relative;
-            overflow: hidden; /* Helps manage animations and background */
+            /* Removed overflow: hidden; to allow scrolling */
         }
-/* 
+
         /* Lord Venkateswara Swamy's Namalu watermark */
         body::before {
             content: '';
-            position: absolute;
+            position: fixed; /* Stays fixed even with scrolling */
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            /* REPLACE this URL with your actual Namalu image URL */
-            background-image: url('https://raw.githubusercontent.com/tharunkumarr98/House-Warming-cermony/main/Shanku%20Chakralu.png'); 
+            /* Use your local path if you confirmed it's working. If deploying publicly,
+               you'll need to upload to an image host (like Imgur) for reliability. */
+            background-image: url('Shanku Chakralu.png'); 
             background-size: contain; 
             background-repeat: no-repeat;
             background-position: center;
             opacity: 0.08; /* Soft watermark effect */
             z-index: -1; /* Ensures text is on top */
             pointer-events: none; /* Allows clicks to pass through */
-        } */
+        }
 
-        .container {
-            max-width: 700px;
-            padding: 30px;
-            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for text readability */
-            border-radius: 15px;
-            box-shadow: 0 8px 16px var(--shadow-color);
-            position: relative;
-            z-index: 1; /* Ensures container is above watermark */
+        /* New wrapper for content to control max-width without a visible box */
+        .main-content-wrapper {
+            max-width: 900px; /* Limit content width for readability */
+            width: 100%; /* Take full width on small screens */
+            box-sizing: border-box; /* Include padding in width calculation */
+            padding: 20px; /* Padding for content inside this wrapper */
+            /* No background, border, or shadow for "free float" */
+            position: relative; /* Needed for z-index relative to body::before */
+            z-index: 1; /* Ensures content is above watermark */
+            margin-top: 20px; /* Space from top */
+            margin-bottom: 20px; /* Space from bottom */
         }
 
         h1 {
@@ -77,34 +80,34 @@
             font-size: 3em;
             margin-bottom: 5px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            line-height: 1.2;
         }
-        h2 {
+        h2 { /* If you plan to use h2, styles are here */
             font-family: 'Charmonman', cursive;
             color: var(--primary-color);
             font-size: 2em;
             margin-bottom: 5px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            line-height: 1.2;
         }
 
         p {
             font-size: 1.4em;
             line-height: 1.6;
-            margin-bottom: 15px; /* Adjust spacing between lines */
+            margin-bottom: 15px;
             color: var(--text-color);
-            transition: opacity 1s ease-in-out; /* Smooth fade for lines */
-            opacity: 0; /* Hidden by default, JavaScript will animate */
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
         }
-
-        /* The .glitter-effect and @keyframes glitter are removed as per your request */
 
         .button-container {
             margin-top: 30px;
             display: flex;
-            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 20px; /* Space between buttons */
-            opacity: 0; /* Hidden by default, JavaScript will fade in */
-            transition: opacity 1s ease-in-out; /* Smooth fade for buttons */
+            gap: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
 
         .action-button {
@@ -121,50 +124,53 @@
             cursor: pointer;
             box-shadow: 0 4px 8px var(--shadow-color);
             transition: all 0.3s ease;
-            text-decoration: none; /* Remove underline for links */
+            text-decoration: none;
         }
 
         .action-button:hover {
             background-color: var(--secondary-color);
-            transform: translateY(-3px); /* Lift effect on hover */
+            transform: translateY(-3px);
             box-shadow: 0 6px 12px var(--shadow-color);
         }
 
         .action-button i {
-            margin-right: 10px; /* Space between icon and text */
+            margin-right: 10px;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
-                padding: 15px;
+                padding: 10px;
             }
-            .container {
-                padding: 25px 15px;
+            .main-content-wrapper {
+                padding: 15px; /* Adjust wrapper padding for smaller screens */
             }
             h1 {
-                font-size: 2em;
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
             }
             p {
-                font-size: 1em;
+                font-size: 1.1em;
             }
             .action-button {
-                width: 90%; /* Almost full width on smaller screens */
-                margin-bottom: 15px; /* Space between stacked buttons */
+                width: 90%;
+                margin-bottom: 15px;
             }
             .button-container {
-                flex-direction: column; /* Stack buttons vertically */
-                gap: 0; /* Remove gap when stacked */
+                flex-direction: column;
+                gap: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>RBs House Warming Cermony</h1>
+    <div class="main-content-wrapper">
+        <h1>RBs House Warming Ceremony</h1>
         <div id="invitation-text">
             <p class="invitation-line">With hearts full of joy and gratitude, we invite you to share in our special day.</p>
-            <p class="invitation-line">We are delighted to announce our Griha Pravesh – the auspicious housewarming ceremony of our new home.</p>
+            <p class="invitation-line">We are delighted to announce our Griha Pravesham – the auspicious housewarming ceremony of our new home.</p>
             <p class="invitation-line">Your presence would fill our hearts with immense happiness and make this occasion even more memorable.</p>
             <p class="invitation-line">Please grace us with your blessings as we embark on this new journey.</p>
             <p class="invitation-line">Join us for the celebrations on <span id="date-placeholder"></span>, starting at <span id="time-placeholder"></span>.</p>
@@ -179,9 +185,7 @@
                 <i class="fas fa-envelope"></i> Send Your Wishes
             </a>
         </div>
-    </div>
-
-    <script>
+    </div> <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Get references to elements
             const datePlaceholder = document.getElementById('date-placeholder');
@@ -213,7 +217,7 @@
 
             // --- Animation Logic ---
             let currentLineIndex = 0;
-            const delayBetweenLines = 2500; // Time each line stays on screen before the next appears (2.5 seconds)
+            const delayBetweenLines = 1800; // Time each line stays on screen before the next appears (1.8 seconds)
 
             function revealLine() {
                 if (currentLineIndex < lines.length) {
