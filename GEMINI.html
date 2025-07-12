@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Griha Pravesh Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Charmonman:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* --- CUSTOMIZATION VARIABLES --- */
+        :root {
+            --primary-color: #7a4a2b; /* A warm, traditional brown */
+            --secondary-color: #b38b6d; /* Lighter shade for accents on hover */
+            --background-color: #ffffff;
+            --text-color: #333333;
+            --button-text-color: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+
+            /* CUSTOMIZE YOUR EVENT DETAILS HERE */
+            --invitation-date: "July 20, 2025"; /* Example: "July 20, 2025" */
+            --invitation-time: "10:30 AM onwards"; /* Example: "10:30 AM onwards" */
+            --google-maps-url: "http://googleusercontent.com/maps.google.com/3"; /* REPLACE with your actual Google Maps URL */
+            --wishes-email: "tharunkumarr98@gmail.com"; /* REPLACE with your family's email address */
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            position: relative;
+            overflow: hidden; /* Helps manage animations and background */
+        }
+
+        /* Lord Venkateswara Swamy's Namalu watermark */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* REPLACE this URL with your actual Namalu image URL */
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Tirumala_Tirupati_Devasthanams_Logo.svg/1200px-Tirumala_Tirupati_Devasthanams_Logo.svg.png'); 
+            background-size: contain; 
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.08; /* Soft watermark effect */
+            z-index: -1; /* Ensures text is on top */
+            pointer-events: none; /* Allows clicks to pass through */
+        }
+
+        .container {
+            max-width: 700px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for text readability */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px var(--shadow-color);
+            position: relative;
+            z-index: 1; /* Ensures container is above watermark */
+        }
+
+        h1 {
+            font-family: 'Charmonman', cursive;
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 15px; /* Adjust spacing between lines */
+            color: var(--text-color);
+            transition: opacity 1s ease-in-out; /* Smooth fade for lines */
+            opacity: 0; /* Hidden by default, JavaScript will animate */
+        }
+
+        /* The .glitter-effect and @keyframes glitter are removed as per your request */
+
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+            justify-content: center;
+            gap: 20px; /* Space between buttons */
+            opacity: 0; /* Hidden by default, JavaScript will fade in */
+            transition: opacity 1s ease-in-out; /* Smooth fade for buttons */
+        }
+
+        .action-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            background-color: var(--primary-color);
+            color: var(--button-text-color);
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            transition: all 0.3s ease;
+            text-decoration: none; /* Remove underline for links */
+        }
+
+        .action-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px); /* Lift effect on hover */
+            box-shadow: 0 6px 12px var(--shadow-color);
+        }
+
+        .action-button i {
+            margin-right: 10px; /* Space between icon and text */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 25px 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .action-button {
+                width: 90%; /* Almost full width on smaller screens */
+                margin-bottom: 15px; /* Space between stacked buttons */
+            }
+            .button-container {
+                flex-direction: column; /* Stack buttons vertically */
+                gap: 0; /* Remove gap when stacked */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Griha Pravesh Ceremony</h1>
+        <div id="invitation-text">
+            <p class="invitation-line">With hearts full of joy and gratitude, we invite you to share in our special day.</p>
+            <p class="invitation-line">We are delighted to announce our Griha Pravesh – the auspicious housewarming ceremony of our new home.</p>
+            <p class="invitation-line">Your presence would fill our hearts with immense happiness and make this occasion even more memorable.</p>
+            <p class="invitation-line">Please grace us with your blessings as we embark on this new journey.</p>
+            <p class="invitation-line">Join us for the celebrations on <span id="date-placeholder"></span>, starting at <span id="time-placeholder"></span>.</p>
+            <p class="invitation-line">We eagerly await your arrival to celebrate this joyous milestone with our loved ones.</p>
+        </div>
+
+        <div class="button-container" id="button-section">
+            <a href="#" target="_blank" class="action-button" id="view-location-button">
+                <i class="fas fa-map-marker-alt"></i> View Location
+            </a>
+            <a href="#" class="action-button" id="send-wishes-button">
+                <i class="fas fa-envelope"></i> Send Your Wishes
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get references to elements
+            const datePlaceholder = document.getElementById('date-placeholder');
+            const timePlaceholder = document.getElementById('time-placeholder');
+            const lines = document.querySelectorAll('.invitation-line');
+            const buttonSection = document.getElementById('button-section');
+            const viewLocationButton = document.getElementById('view-location-button');
+            const sendWishesButton = document.getElementById('send-wishes-button');
+
+            // --- Customization Variables from CSS (defined in :root) ---
+            // These values are read directly from the CSS variables.
+            // Update them in the <style> section's :root block above.
+            const invitationDate = getComputedStyle(document.documentElement).getPropertyValue('--invitation-date').trim();
+            const invitationTime = getComputedStyle(document.documentElement).getPropertyValue('--invitation-time').trim();
+            const googleMapsUrl = getComputedStyle(document.documentElement).getPropertyValue('--google-maps-url').trim();
+            const wishesEmail = getComputedStyle(document.documentElement).getPropertyValue('--wishes-email').trim();
+
+            // Populate date and time placeholders
+            if (datePlaceholder) datePlaceholder.textContent = invitationDate.replace(/"/g, ''); // Remove quotes if present
+            if (timePlaceholder) timePlaceholder.textContent = invitationTime.replace(/"/g, ''); // Remove quotes if present
+
+            // Set button hrefs dynamically
+            if (viewLocationButton) {
+                viewLocationButton.href = googleMapsUrl.replace(/"/g, '');
+            }
+            if (sendWishesButton) {
+                sendWishesButton.href = `mailto:${wishesEmail.replace(/"/g, '')}?subject=Best%20Wishes%20for%20your%20Griha%20Pravesh`;
+            }
+
+            // --- Animation Logic ---
+            let currentLineIndex = 0;
+            const delayBetweenLines = 2500; // Time each line stays on screen before the next appears (2.5 seconds)
+
+            function revealLine() {
+                if (currentLineIndex < lines.length) {
+                    const line = lines[currentLineIndex];
+
+                    // Make the current line visible by fading in
+                    line.style.opacity = 1;
+                    
+                    currentLineIndex++; // Move to the next line
+
+                    // Schedule the next line reveal
+                    setTimeout(revealLine, delayBetweenLines);
+                } else {
+                    // All lines have been revealed, now display the buttons
+                    if (buttonSection) {
+                        buttonSection.style.opacity = 1; // Fade in buttons
+                        buttonSection.style.display = 'flex'; // Ensure flex display for layout
+                    }
+                }
+            }
+
+            // Start the animation after a short initial delay
+            setTimeout(revealLine, 1000);
+        });
+    </script>
+</body>
+</html>
