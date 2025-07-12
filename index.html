@@ -152,7 +152,7 @@
       <h1>రావిక్రింది వారి గృహ ప్రవేశ వేడుక</h1>
       <div id="invitation-text-te">
         <p class="invitation-line">ఆనందంతో కూడిన మనసుతో మేము మా ప్రత్యేకమైన రోజును మీతో పంచుకోవాలని ఆహ్వానిస్తున్నాము.</p>
-        <p class="invitation-line">మా కొత్త ఇంటి గృహ ప్రవేశ వేడుకకు మిమ్మల్ని ఆహ్వానించడం మాకు ఆనందంగా ఉంది.</p>
+        <p class="invitation-line">మా కొత్త ఇంటి <strong>గృహ ప్రవేశ వేడుకకు</strong> మిమ్మల్ని ఆహ్వానించడం మాకు ఆనందంగా ఉంది.</p>
         <p class="invitation-line">మీ సమక్షం మా ఆనందాన్ని రెట్టింపు చేస్తుంది మరియు ఈ రోజును మరింత గుర్తుండేలా చేస్తుంది.</p>
         <p class="invitation-line">ఈ కొత్త ప్రయాణంలో మమ్మల్ని మీ ఆశీర్వాదాలతో కరుణించండి.</p>
         <p class="invitation-line">ఈ వేడుకలకు <strong><span id="date-placeholder-te"></span> ఉదయం <span id="time-placeholder-te"></span></strong> నుంచి మీరు తప్పక హాజరుకావాలి.</p>
@@ -172,57 +172,49 @@
     </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const datePlaceholder = document.getElementById('date-placeholder');
-      const timePlaceholder = document.getElementById('time-placeholder');
-      const datePlaceholderTe = document.getElementById('date-placeholder-te');
-      const timePlaceholderTe = document.getElementById('time-placeholder-te');
-      const lines = document.querySelectorAll('.invitation-line');
-      const buttonSection = document.getElementById('button-section');
-      const viewLocationButton = document.getElementById('view-location-button');
-      const sendWishesButton = document.getElementById('send-wishes-button');
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const datePlaceholder = document.getElementById('date-placeholder');
+    const timePlaceholder = document.getElementById('time-placeholder');
+    const datePlaceholderTe = document.getElementById('date-placeholder-te');
+    const timePlaceholderTe = document.getElementById('time-placeholder-te');
+    const viewLocationButton = document.getElementById('view-location-button');
+    const sendWishesButton = document.getElementById('send-wishes-button');
+    const buttonSection = document.getElementById('button-section');
 
-      const lang = new URLSearchParams(window.location.search).get("lang") || "en";
-      const isTelugu = lang === "te";
+    const lang = new URLSearchParams(window.location.search).get("lang") || "en";
+    const isTelugu = lang === "te";
 
-      document.getElementById('content-en').style.display = isTelugu ? "none" : "block";
-      document.getElementById('content-te').style.display = isTelugu ? "block" : "none";
+    document.getElementById('content-en').style.display = isTelugu ? "none" : "block";
+    document.getElementById('content-te').style.display = isTelugu ? "block" : "none";
 
-      const invitationDate = getComputedStyle(document.documentElement).getPropertyValue('--invitation-date').replace(/"/g, '').trim();
-      const invitationTime = getComputedStyle(document.documentElement).getPropertyValue('--invitation-time').replace(/"/g, '').trim();
-      const googleMapsUrl = getComputedStyle(document.documentElement).getPropertyValue('--google-maps-url').replace(/"/g, '').trim();
-      const wishesEmail = getComputedStyle(document.documentElement).getPropertyValue('--wishes-email').replace(/"/g, '').trim();
+    const invitationDate = getComputedStyle(document.documentElement).getPropertyValue('--invitation-date').replace(/"/g, '').trim();
+    const invitationTime = getComputedStyle(document.documentElement).getPropertyValue('--invitation-time').replace(/"/g, '').trim();
+    const googleMapsUrl = getComputedStyle(document.documentElement).getPropertyValue('--google-maps-url').replace(/"/g, '').trim();
+    const wishesEmail = getComputedStyle(document.documentElement).getPropertyValue('--wishes-email').replace(/"/g, '').trim();
 
-      if (isTelugu) {
-        if (datePlaceholderTe) datePlaceholderTe.textContent = invitationDate;
-        if (timePlaceholderTe) timePlaceholderTe.textContent = invitationTime;
-        viewLocationButton.textContent = '🏠 ప్రదేశం';
-        sendWishesButton.textContent = 'శుభాకాంక్షలు పంపండి';
-      } else {
-        if (datePlaceholder) datePlaceholder.textContent = invitationDate;
-        if (timePlaceholder) timePlaceholder.textContent = invitationTime;
-      }
+    if (isTelugu) {
+      if (datePlaceholderTe) datePlaceholderTe.textContent = invitationDate;
+      if (timePlaceholderTe) timePlaceholderTe.textContent = invitationTime;
+      viewLocationButton.textContent = '🏠 ప్రదేశం';
+      sendWishesButton.textContent = 'శుభాకాంక్షలు పంపండి';
+    } else {
+      if (datePlaceholder) datePlaceholder.textContent = invitationDate;
+      if (timePlaceholder) timePlaceholder.textContent = invitationTime;
+    }
 
-      viewLocationButton.href = googleMapsUrl;
-      sendWishesButton.href = `https://wa.me/9966316192?text=Hello%20RBs%20Family,%0A%0AI%20would%20like%20to%20send%20my%20wishes%20for%20the%20House%20Warming%20Ceremony.%0A%0AThank%20you!`;
+    viewLocationButton.href = googleMapsUrl;
+    sendWishesButton.href = `https://wa.me/9966316192?text=Hello%20RBs%20Family,%0A%0AI%20would%20like%20to%20send%20my%20wishes%20for%20the%20House%20Warming%20Ceremony.%0A%0AThank%20you!`;
 
-      let currentLineIndex = 0;
-      const delayBetweenLines = isTelugu ? 1400 : 1800;
+    // ✅ Show all lines immediately
+    const activeLines = document.querySelectorAll((isTelugu ? '#content-te' : '#content-en') + ' .invitation-line');
+    activeLines.forEach(line => line.style.opacity = 1);
 
-      function revealLine() {
-        if (currentLineIndex < lines.length) {
-          lines[currentLineIndex].style.opacity = 1;
-          currentLineIndex++;
-          setTimeout(revealLine, delayBetweenLines);
-        } else {
-          buttonSection.style.opacity = 1;
-          buttonSection.style.display = 'flex';
-        }
-      }
+    // ✅ Show buttons
+    buttonSection.style.opacity = 1;
+    buttonSection.style.display = 'flex';
+  });
+</script>
 
-      setTimeout(revealLine, 1000);
-    });
-  </script>
 </body>
 </html>
